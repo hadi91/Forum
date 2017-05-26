@@ -1,0 +1,28 @@
+<h1><%= @topic.title %></h1>
+<p><%= @topic.body %></p>
+
+<% if @topic.user == current_user %>
+<%=link_to "Edit", edit_topic_path(@topic)%>
+<% end %>
+
+<br>
+
+<h3>
+  Reply
+</h3>
+
+<%= render :partial => 'comments/comment' %>
+
+
+<%= link_to "Home", root_path%>
+<%= link_to "Delete", topic_path(@topic),
+                      method: :delete,
+                      data: {confirm: 'Are you sure?'} %>
+
+<br>
+
+<% @topic.comments.all.each do |comment| %>
+
+<%= comment.body %>
+
+<% end %>
